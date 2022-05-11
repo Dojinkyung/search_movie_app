@@ -1,0 +1,77 @@
+@use '/src/styles/constants/colors';
+@use '/src/styles/constants/levels';
+@use '/src/styles/mixins/flexbox';
+@use '/src/styles/mixins/position';
+
+.movie {
+  width: 360px;
+  height: 720px;
+  padding: 40px;
+  background-color: colors.$BACKGROUND_COLOR;
+  border-radius: 60px;
+
+  h1 {
+    font-size: 24px;
+    font-weight: 600;
+    color: colors.$BIG_TITLE;
+    text-align: center;
+  }
+  form {
+    @include flexbox.flexbox(center, center);
+    background: colors.$SEARCH_BAR;
+    display: flex;
+    padding: 2px;
+    border: 1px solid currentColor;
+    border-radius: 5px;
+    margin: 15px;
+
+    input {
+      margin: 0;
+      padding: 7px 8px;
+      font-size: 14px;
+      color: inherit;
+      border: 1px solid transparent;
+      border-radius: 10px;
+      color: colors.$BIG_TITLE;
+    }
+    input[type='search']::placeholder {
+      color: colors.$PLACE_HOLDER;
+    }
+    button {
+      color: colors.$PLACE_HOLDER;
+    }
+  }
+
+  .searched {
+    margin-top: 40px;
+    height: 480px;
+
+    color: colors.$PLACE_HOLDER;
+    h2 {
+      font-size: 18px;
+      font-weight: 600;
+    }
+    .noResult {
+      margin-top: 180px;
+      color: colors.$PLACE_HOLDER;
+      font-size: 25px;
+      font-weight: 600;
+    }
+  }
+  .searchedMovie {
+    @include flexbox.flexbox(start, center);
+    flex-direction: column;
+    position: relative;
+    overflow: auto;
+    height: 410px;
+    margin-top: 24px;
+
+    ul {
+      margin-top: 24px;
+      width: 100%;
+    }
+  }
+  .loadingAndError {
+    text-align: center;
+  }
+}

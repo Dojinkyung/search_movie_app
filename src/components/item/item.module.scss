@@ -1,0 +1,52 @@
+@use '/src/styles/constants/colors';
+@use '/src/styles/constants/levels';
+@use '/src/styles/mixins/flexbox';
+@use '/src/styles/mixins/position';
+
+.searchedMovie {
+  @include flexbox.flexbox(start, center);
+  flex-direction: column;
+  position: relative;
+}
+.movieList {
+  border-radius: 20px;
+  flex-direction: row;
+  width: 100%;
+  margin-top: 10px;
+  background-color: colors.$SEARCH_BAR;
+  .movieBtn {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 170px;
+    overflow: scroll;
+    .movieInfo {
+      flex-direction: column;
+      flex-grow: 1;
+      text-align: center;
+      color: colors.$PLACE_HOLDER;
+      height: 100%;
+      padding-right: 5px;
+      .title {
+        color: colors.$BIG_TITLE;
+        font-size: 25px;
+        padding-bottom: 10px;
+      }
+      .info {
+        font-size: 18px;
+      }
+    }
+    img {
+      min-width: 130px;
+      min-height: 170px;
+      max-width: 130px;
+      max-height: 170px;
+      padding-right: 5px;
+      border-radius: 20px;
+      color: colors.$PLACE_HOLDER;
+    }
+    .temp {
+      font-size: 32px;
+    }
+  }
+}

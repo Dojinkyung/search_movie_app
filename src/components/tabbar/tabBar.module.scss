@@ -1,0 +1,28 @@
+@use '/src/styles/constants/colors';
+@use '/src/styles/constants/levels';
+@use '/src/styles/mixins/flexbox';
+@use '/src/styles/mixins/position';
+
+.TabBar {
+  @include flexbox.flexbox(around, center);
+  flex-direction: row;
+  width: 100%;
+  height: 20px;
+  margin-top: 10px;
+  padding-top: 30px;
+
+  a {
+    height: 50px;
+    color: colors.$PLACE_HOLDER;
+    font-size: 20px;
+    padding: 4px;
+    padding: 4px 14px;
+    &:hover {
+      color: colors.$BIG_TITLE;
+    }
+    &.isActive {
+      font-weight: 600;
+      color: colors.$BIG_TITLE;
+    }
+  }
+}

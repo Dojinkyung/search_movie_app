@@ -1,0 +1,78 @@
+@use '/src/styles/constants/colors';
+@use '/src/styles/constants/levels';
+@use '/src/styles/mixins/flexbox';
+@use '/src/styles/mixins/position';
+
+.favMovie {
+  width: 360px;
+  height: 720px;
+  padding: 40px;
+  background-color: colors.$BACKGROUND_COLOR;
+  border-radius: 60px;
+
+  h1 {
+    font-size: 24px;
+    font-weight: 600;
+    color: colors.$BIG_TITLE;
+    text-align: center;
+  }
+}
+.searched {
+  margin-top: 40px;
+  height: 534px;
+
+  color: colors.$PLACE_HOLDER;
+  h2 {
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .noResult {
+    margin-top: 40px;
+    color: colors.$PLACE_HOLDER;
+    font-size: 25px;
+    font-weight: 600;
+  }
+}
+.searchedMovie {
+  @include flexbox.flexbox(start, center);
+  flex-direction: column;
+  position: relative;
+  overflow: auto;
+  height: 480px;
+
+  ul {
+    margin-top: 24px;
+    width: 100%;
+  }
+  .movieList {
+    background-color: colors.$SEARCH_BAR;
+    border-radius: 20px;
+    flex-direction: row;
+    width: 100%;
+    margin-top: 10px;
+    .movieBtn {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      padding: 10px;
+      .movieInfo {
+        flex-direction: column;
+        flex-grow: 1;
+        text-align: center;
+        color: colors.$PLACE_HOLDER;
+        font-size: 20px;
+        height: 100%;
+        .title {
+          font-size: 30px;
+          padding-bottom: 10px;
+        }
+      }
+      img {
+        padding-right: 10px;
+      }
+      .temp {
+        font-size: 32px;
+      }
+    }
+  }
+}

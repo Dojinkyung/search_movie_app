@@ -1,5 +1,4 @@
 import { useCallback, useRef, useState } from 'react'
-import store from 'store'
 
 import MovieItem from 'components/item/Item'
 import styles from './Movie.module.scss'
@@ -10,6 +9,7 @@ const Movie = () => {
   const [searchMovie, setSearchMovie] = useState<string>('')
   const [pageNumber, setPageNumber] = useState(1)
   const { movies, hasMore, loading, error, totalResult } = useSearchMovie(searchMovie, pageNumber)
+
   const handleSearch = (event: React.FormEvent<HTMLInputElement>) => {
     event.preventDefault()
     setSearchMovie(event.currentTarget.value)
@@ -18,7 +18,6 @@ const Movie = () => {
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
   }
-
   const observer = useRef<IntersectionObserver | null>(null)
   const lastBookElementRef = useCallback(
     (node: HTMLElement | null) => {
@@ -33,7 +32,6 @@ const Movie = () => {
     },
     [loading, hasMore, movies.length, totalResult]
   )
-
   return (
     <section className={styles.movie}>
       <header>
@@ -60,7 +58,7 @@ const Movie = () => {
           ) : (
             <div className={styles.noResult}>검색결과가 없습니다.</div>
           )}
-          <div className={styles.loadingAndError}>{loading && !error && 'Loading...'}</div>
+          <div className={styles.loadingAndError}>{movies && loading && !error && 'Loading...'}</div>
         </ul>
       </main>
       <footer>

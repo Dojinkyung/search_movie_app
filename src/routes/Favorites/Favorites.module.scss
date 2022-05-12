@@ -38,41 +38,10 @@
   flex-direction: column;
   position: relative;
   overflow: auto;
-  height: 480px;
-
+  height: 490px;
+  margin-top: 24px;
   ul {
     margin-top: 24px;
     width: 100%;
-  }
-  .movieList {
-    background-color: colors.$SEARCH_BAR;
-    border-radius: 20px;
-    flex-direction: row;
-    width: 100%;
-    margin-top: 10px;
-    .movieBtn {
-      display: flex;
-      flex-direction: row;
-      width: 100%;
-      padding: 10px;
-      .movieInfo {
-        flex-direction: column;
-        flex-grow: 1;
-        text-align: center;
-        color: colors.$PLACE_HOLDER;
-        font-size: 20px;
-        height: 100%;
-        .title {
-          font-size: 30px;
-          padding-bottom: 10px;
-        }
-      }
-      img {
-        padding-right: 10px;
-      }
-      .temp {
-        font-size: 32px;
-      }
-    }
   }
 }

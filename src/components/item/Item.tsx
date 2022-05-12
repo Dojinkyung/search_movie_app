@@ -1,7 +1,8 @@
+import { useState } from 'react'
+import cx from 'classnames'
+
 import styles from './item.module.scss'
 import { ISearch } from 'types/movie'
-
-import { useEffect, useState } from 'react'
 import Modal from 'components/modal/modal'
 
 interface Props {
@@ -18,7 +19,7 @@ const MovieItem = ({ item }: Props) => {
   }
 
   return (
-    <li className={styles.movieList}>
+    <li className={cx(styles.movieList, { [styles.selected]: item.Fav === true })}>
       <button className={styles.movieBtn} type='button' onClick={openReq}>
         <img src={item.Poster} alt={item.Title} />
         <span className={styles.movieInfo}>

@@ -1,3 +1,5 @@
+import store from 'store'
+import { ISearch } from 'types/movie'
 import {
   atom,
   selector,
@@ -12,8 +14,6 @@ import {
   SetterOrUpdater,
   Resetter,
 } from 'recoil'
-import store from 'store'
-import { ISearch } from 'types/movie'
 
 export { atom, selector, useRecoilState, useSetRecoilState, useRecoilValue, useResetRecoilState, useRecoilCallback }
 
@@ -26,6 +26,11 @@ export function useRecoil<T>(recoilState: RecoilState<T>): [T, SetterOrUpdater<T
 }
 
 export const FavMovie = atom<ISearch[]>({
-  key: '#FavMovie',
+  key: '#favMovie',
   default: [] || store.get('fav'),
+})
+
+export const page = atom<string>({
+  key: '#page',
+  default: 'search',
 })

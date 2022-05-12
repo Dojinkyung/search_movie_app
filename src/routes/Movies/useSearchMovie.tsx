@@ -1,3 +1,4 @@
+import store from 'store'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 
@@ -9,7 +10,6 @@ const useSearchMovie = (searchMovie: string, pageNumber: number) => {
   const [movies, setMovies] = useState<ISearch[]>([])
   const [hasMore, setHasMore] = useState(true)
   const [totalResult, setTotalResult] = useState<number>(0)
-
   useEffect(() => {
     setMovies([])
   }, [searchMovie])
@@ -30,6 +30,12 @@ const useSearchMovie = (searchMovie: string, pageNumber: number) => {
       }),
     })
       .then((res) => {
+        res.data.Search.map((movie: ISearch) =>
+          store.get('fav').find((fav: ISearch) => fav.Title === movie.Title)
+            ? Object.assign(movie, { Fav: true })
+            : Object.assign(movie, { Fav: false })
+        )
+
         setMovies((prevMovies: Array<ISearch>) => {
           return prevMovies.concat(res.data.Search)
         })

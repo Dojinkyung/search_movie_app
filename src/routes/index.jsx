@@ -5,6 +5,7 @@ import Favorites from './Favorites'
 import {RecoilRoot} from 'recoil'
 
 const App = () => {
+  
   return (
     <div className={styles.app}>
       <BrowserRouter>

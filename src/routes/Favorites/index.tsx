@@ -15,7 +15,7 @@ const Favorites = () => {
       <main className={styles.searched}>
         <h2>Favorite Movies</h2>
         <ul className={styles.searchedMovie}>
-          {store.get('fav') ? (
+          {t ? (
             store.get('fav').map((movie: ISearch) => {
               return <MovieItem key={`movie-${movie.Title}-${movie.imdbID}`} item={movie} />
             })

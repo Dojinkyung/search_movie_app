@@ -31,7 +31,7 @@ const useSearchMovie = (searchMovie: string, pageNumber: number) => {
     })
       .then((res) => {
         res.data.Search.map((movie: ISearch) =>
-          store.get('fav').find((fav: ISearch) => fav.Title === movie.Title)
+          store.get('fav').find((fav: ISearch) => fav.imdbID === movie.imdbID)
             ? Object.assign(movie, { Fav: true })
             : Object.assign(movie, { Fav: false })
         )

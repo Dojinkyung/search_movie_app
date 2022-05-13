@@ -19,7 +19,7 @@ const useSearchMovie = (searchMovie: string, pageNumber: number) => {
     setError(false)
 
     const { CancelToken } = axios
-    let cancel: any
+    let cancel: () => void
 
     axios({
       method: 'GET',

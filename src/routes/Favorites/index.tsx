@@ -1,4 +1,3 @@
-import store from 'store'
 import styles from './Favorites.module.scss'
 import TabBar from 'components/tabbar/tabBar'
 import MovieItem from 'components/item/Item'
@@ -16,7 +15,7 @@ const Favorites = () => {
         <h2>Favorite Movies</h2>
         <ul className={styles.searchedMovie}>
           {t ? (
-            store.get('fav').map((movie: ISearch) => {
+            t.map((movie: ISearch) => {
               return <MovieItem key={`movie-${movie.Title}-${movie.imdbID}`} item={movie} />
             })
           ) : (

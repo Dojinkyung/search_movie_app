@@ -47,7 +47,7 @@ const Movie = () => {
         </form>
       </header>
       <main className={styles.searched}>
-        <h2>searched Movies {totalResult || null}</h2>
+        <h2>searched Movies</h2>
         <ul className={styles.searchedMovie}>
           {!error && movies ? (
             movies.map((movie, index) => {

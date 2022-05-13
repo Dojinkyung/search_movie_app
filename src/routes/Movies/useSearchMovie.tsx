@@ -23,7 +23,7 @@ const useSearchMovie = (searchMovie: string, pageNumber: number) => {
 
     axios({
       method: 'GET',
-      url: 'http://www.omdbapi.com/',
+      url: 'https://www.omdbapi.com/',
       params: { apikey: process.env.REACT_APP_MOVIE_API, s: searchMovie, page: pageNumber },
       cancelToken: new CancelToken((c) => {
         cancel = c

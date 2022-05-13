@@ -1,9 +1,9 @@
 import { useState } from 'react'
-import cx from 'classnames'
 
 import styles from './item.module.scss'
 import { ISearch } from 'types/movie'
 import Modal from 'components/modal/modal'
+import { StarIcon } from 'assets/svgs'
 
 interface Props {
   item: ISearch
@@ -19,15 +19,16 @@ const MovieItem = ({ item }: Props) => {
   }
 
   return (
-    <li className={cx(styles.movieList, { [styles.selected]: item.Fav === true })}>
+    <li className={styles.movieList}>
       <button className={styles.movieBtn} type='button' onClick={openReq}>
         <img src={item.Poster} alt={item.Title} />
         <span className={styles.movieInfo}>
-          <div className={styles.title}>{item.Title}</div>
+          <h1 className={styles.title}>{item.Title}</h1>
           <div className={styles.info}>Year:{item.Year}</div>
           <div className={styles.info}>Type:{item.Type}</div>
         </span>
-      </button>
+        {item.Fav ? <StarIcon /> : null}
+      </button>{' '}
       {isOpen ? <Modal item={item} open={isOpen} close={closeReq} /> : null}
     </li>
   )

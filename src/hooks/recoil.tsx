@@ -34,3 +34,7 @@ export const page = atom<string>({
   key: '#page',
   default: 'search',
 })
+export const searchMovie = atom<string>({
+  key: '#serachMovie',
+  default: '',
+})

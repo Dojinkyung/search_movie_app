@@ -24,20 +24,26 @@ const useSearchMovie = (searchMovie: string, pageNumber: number) => {
     axios({
       method: 'GET',
       url: 'http://www.omdbapi.com/',
-      params: { apikey: '92e32667', s: searchMovie, page: pageNumber },
+      params: { apikey: process.env.REACT_APP_MOVIE_API, s: searchMovie, page: pageNumber },
       cancelToken: new CancelToken((c) => {
         cancel = c
       }),
     })
       .then((res) => {
-        res.data.Search.map((movie: ISearch) =>
+        const map = new Map()
+        for (const character of res.data.Search) {
+          map.set(JSON.stringify(character), character)
+        }
+        const tmp: ISearch[] = Array.from(map.values())
+
+        tmp.map((movie: ISearch) =>
           store.get('fav').find((fav: ISearch) => fav.imdbID === movie.imdbID)
             ? Object.assign(movie, { Fav: true })
             : Object.assign(movie, { Fav: false })
         )
 
         setMovies((prevMovies: Array<ISearch>) => {
-          return prevMovies.concat(res.data.Search)
+          return prevMovies.concat(tmp)
         })
         setTotalResult(parseInt(res.data.totalResults, 10))
         setHasMore(res.data.Search.length > 0)

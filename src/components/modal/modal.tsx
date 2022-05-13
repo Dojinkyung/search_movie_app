@@ -40,10 +40,10 @@ const Modal = (props: props) => {
           <p className={styles.info}>
             {item.Title}(을)를 {item.Fav ? '삭제' : '추가'}하시겠습니까?
           </p>
-          <button type='submit' className={styles.btn} onClick={close}>
+          <button type='button' className={styles.btn} onClick={close}>
             취소
           </button>
-          <button type='submit' className={styles.btn} onClick={handleEventBtn}>
+          <button type='button' className={styles.btn} onClick={handleEventBtn}>
             즐겨찾기 {item.Fav ? '삭제' : '추가'}
           </button>
         </div>

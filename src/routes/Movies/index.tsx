@@ -1,18 +1,18 @@
 import { useCallback, useRef, useState } from 'react'
-
+import { searchMovie, useRecoilState } from 'hooks/recoil'
 import MovieItem from 'components/item/Item'
 import styles from './Movie.module.scss'
 import useSearchMovie from './useSearchMovie'
 import TabBar from 'components/tabbar/tabBar'
 
 const Movie = () => {
-  const [searchMovie, setSearchMovie] = useState<string>('')
+  const [search, setSearch] = useRecoilState(searchMovie)
   const [pageNumber, setPageNumber] = useState(1)
-  const { movies, hasMore, loading, error, totalResult } = useSearchMovie(searchMovie, pageNumber)
+  const { movies, hasMore, loading, error, totalResult } = useSearchMovie(search, pageNumber)
 
   const handleSearch = (event: React.FormEvent<HTMLInputElement>) => {
     event.preventDefault()
-    setSearchMovie(event.currentTarget.value)
+    setSearch(event.currentTarget.value)
     setPageNumber(1)
   }
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -32,12 +32,13 @@ const Movie = () => {
     },
     [loading, hasMore, movies.length, totalResult]
   )
+
   return (
     <section className={styles.movie}>
       <header>
         <h1>Movie</h1>
         <form onSubmit={onSubmit}>
-          <input placeholder='Search Movie!' onChange={handleSearch} />
+          <input placeholder='Search Movie!' defaultValue={search || ''} onChange={handleSearch} />
           <button type='submit'>제출</button>
         </form>
       </header>

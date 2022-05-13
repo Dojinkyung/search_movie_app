@@ -2,10 +2,9 @@ import styles from './Routes.module.scss'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Movie from './Movies'
 import Favorites from './Favorites'
-import {RecoilRoot} from 'recoil'
+import { RecoilRoot } from 'recoil'
 
 const App = () => {
-  
   return (
     <div className={styles.app}>
       <BrowserRouter>
@@ -21,4 +20,4 @@ const App = () => {
   )
 }
 
-export default App 
+export default App

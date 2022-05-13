@@ -2,11 +2,12 @@ import styles from './Favorites.module.scss'
 import TabBar from 'components/tabbar/tabBar'
 import MovieItem from 'components/item/Item'
 import { ISearch } from 'types/movie'
-import { useRecoilValue } from 'recoil'
-import { FavMovie } from 'hooks/recoil'
+import { FavMovie, useRecoilValue } from 'hooks/recoil'
+
+import store from 'store'
 
 const Favorites = () => {
-  const t = useRecoilValue(FavMovie)
+  const tmp = useRecoilValue(FavMovie)
 
   return (
     <section className={styles.favMovie}>
@@ -14,13 +15,11 @@ const Favorites = () => {
       <main className={styles.searched}>
         <h2>Favorite Movies</h2>
         <ul className={styles.searchedMovie}>
-          {t ? (
-            t.map((movie: ISearch) => {
-              return <MovieItem key={`movie-${movie.Title}-${movie.imdbID}`} item={movie} />
-            })
-          ) : (
-            <div className={styles.noResult}>검색결과가 없습니다.</div>
-          )}
+          {tmp
+            ? store.get('fav').map((movie: ISearch) => {
+                return <MovieItem key={`movie-${movie.Title}-${movie.imdbID}`} item={movie} />
+              })
+            : null}
         </ul>
       </main>
       <TabBar />

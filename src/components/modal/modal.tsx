@@ -1,5 +1,4 @@
 import cx from 'classnames'
-
 import { FavMovie, useRecoilState } from 'hooks/recoil'
 import styles from './modal.module.scss'
 import { ISearch } from 'types/movie'
@@ -29,7 +28,6 @@ const Modal = (props: props) => {
       )
       setFavSelect(store.get('fav'))
     }
-
     close()
   }
 

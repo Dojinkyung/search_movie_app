@@ -1,8 +1,8 @@
-import { NavLink } from 'react-router-dom'
-import styles from './tabBar.module.scss'
-import cx from 'classnames'
-import { page, useRecoilState } from 'hooks/recoil'
 import React from 'react'
+import cx from 'classnames'
+import styles from './tabBar.module.scss'
+import { NavLink } from 'react-router-dom'
+import { page, useRecoilState } from 'hooks/recoil'
 
 const TabBar = () => {
   const [, setPage] = useRecoilState(page)

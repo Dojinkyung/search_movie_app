@@ -4,6 +4,7 @@ import MovieItem from 'components/item/Item'
 import styles from './Movie.module.scss'
 import useSearchMovie from './useSearchMovie'
 import TabBar from 'components/tabbar/tabBar'
+import store from 'store'
 
 const Movie = () => {
   const [search, setSearch] = useRecoilState(searchMovie)
@@ -12,6 +13,9 @@ const Movie = () => {
 
   const handleSearch = (event: React.FormEvent<HTMLInputElement>) => {
     event.preventDefault()
+    if (!store.get('fav')) {
+      store.set('fav', [])
+    }
     setSearch(event.currentTarget.value)
     setPageNumber(1)
   }
@@ -45,7 +49,7 @@ const Movie = () => {
       <main className={styles.searched}>
         <h2>searched Movies {totalResult || null}</h2>
         <ul className={styles.searchedMovie}>
-          {movies ? (
+          {!error && movies ? (
             movies.map((movie, index) => {
               if (movies.length === index + 1) {
                 return (

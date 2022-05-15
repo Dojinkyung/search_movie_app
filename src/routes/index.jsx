@@ -11,7 +11,6 @@ const App = () => {
         <RecoilRoot>
           <Routes>
             <Route path='/' element={<Movie />} />
-            <Route path='search' element={<Movie />} />
             <Route path='favorites' element={<Favorites />} />
           </Routes>
         </RecoilRoot>

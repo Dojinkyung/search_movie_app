@@ -14,7 +14,7 @@ const TabBar = () => {
   return (
     <nav className={styles.TabBar}>
       <button type='button' onClick={handlePage} value='search'>
-        <NavLink to='/search' className={({ isActive }) => cx({ [styles.isActive]: isActive })}>
+        <NavLink to='/' className={({ isActive }) => cx({ [styles.isActive]: isActive })}>
           search
         </NavLink>
       </button>

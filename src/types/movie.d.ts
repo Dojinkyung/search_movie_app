@@ -1,5 +1,5 @@
 export interface ISearch {
-  Fav: boolean
+  Fav?: boolean
   Title: string
   Year: string
   imdbID: string

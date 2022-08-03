@@ -1,31 +1,38 @@
-import { useCallback, useRef, useState } from 'react'
+import { useCallback, useMemo, useRef, useState } from 'react'
 import { searchMovie, useRecoilState } from 'hooks/recoil'
-import MovieItem from 'components/item/Item'
 import styles from './Movie.module.scss'
-import useSearchMovie from './useSearchMovie'
 import TabBar from 'components/tabbar/tabBar'
 import store from 'store'
+import debounce from 'lodash.debounce'
+
+import MovieItem from 'components/item/Item'
+import useSearchMovie from 'service/useSearchMovie'
 
 const Movie = () => {
   const [search, setSearch] = useRecoilState(searchMovie)
   const [pageNumber, setPageNumber] = useState(1)
-  const { movies, hasMore, loading, error, totalResult } = useSearchMovie(search, pageNumber)
 
-  const handleSearch = (event: React.FormEvent<HTMLInputElement>) => {
-    event.preventDefault()
+  const { movies, isLoading, error, hasMore, totalResult } = useSearchMovie(search, pageNumber)
+
+  const debouncedResults = useMemo(() => {
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+      event.preventDefault()
+      setSearch(event.target.value.trim())
+      setPageNumber(1)
+    }
     if (!store.get('fav')) {
       store.set('fav', [])
     }
-    setSearch(event.currentTarget.value)
-    setPageNumber(1)
-  }
+    return debounce(handleChange, 800)
+  }, [setSearch])
+
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
   }
   const observer = useRef<IntersectionObserver | null>(null)
   const lastBookElementRef = useCallback(
     (node: HTMLElement | null) => {
-      if (loading) return
+      if (isLoading) return
       if (observer.current) observer.current.disconnect()
       observer.current = new IntersectionObserver((entries) => {
         if (entries[0].isIntersecting && hasMore && movies.length < totalResult) {
@@ -34,7 +41,7 @@ const Movie = () => {
       })
       if (node) observer.current.observe(node)
     },
-    [loading, hasMore, movies.length, totalResult]
+    [hasMore, isLoading, movies.length, totalResult]
   )
 
   return (
@@ -42,7 +49,7 @@ const Movie = () => {
       <header>
         <h1>Movie</h1>
         <form onSubmit={onSubmit}>
-          <input placeholder='Search Movie!' defaultValue={search || ''} onChange={handleSearch} />
+          <input placeholder='Search Movie!' defaultValue={search || ''} onChange={debouncedResults} />
           <button type='submit'>제출</button>
         </form>
       </header>
@@ -63,7 +70,7 @@ const Movie = () => {
           ) : (
             <div className={styles.noResult}>검색결과가 없습니다.</div>
           )}
-          <div className={styles.loadingAndError}>{movies && loading && !error && 'Loading...'}</div>
+          <div className={styles.loadingAndError}>{movies && isLoading && 'Loading...'}</div>
         </ul>
       </main>
       <footer>

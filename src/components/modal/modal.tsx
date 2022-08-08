@@ -18,6 +18,8 @@ const Modal = (props: props) => {
   const handleEventBtn = () => {
     if (item.Fav === false) {
       item.Fav = true
+      item.Id = store.get('fav').length.toString()
+
       store.set('fav', [...store.get('fav'), item])
       setFavSelect(store.get('fav'))
     } else {

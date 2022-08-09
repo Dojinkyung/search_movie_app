@@ -6,9 +6,8 @@
 .movieList {
   display: flex;
   flex-direction: row;
-
   border-radius: 20px;
-  width: 100%;
+  width: 270px;
   margin-top: 10px;
   background-color: colors.$SEARCH_BAR;
   .movieBtn {

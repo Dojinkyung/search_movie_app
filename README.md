@@ -13,6 +13,7 @@
 - SCSS
 - infinite scroll: Intersection Observer API
 - localstorage 저장: store.js 사용
+- drag&drop: beautiful dnd 사용
 
 ## 📦 폴더 구조
 
@@ -21,6 +22,7 @@
  ┣ 📂assets
  ┃ ┗ 📂svgs #svg
  ┣ 📂components #컴포넌트
+ ┃ ┣ 📂dragdrop
  ┃ ┣ 📂item
  ┃ ┣ 📂modal
  ┃ ┗ 📂tabbar
@@ -77,6 +79,9 @@ yarn install && yarn start
 
 ## 3. 무한 스크롤
 
+## 4. drag & drop
+- 즐겨찾기에서 체크표시를 drag하여 사용
+
 # ✏️ 어려웠던 점 + 추가할 기능 + 리팩토링
 
 ## 어려웠던 점
@@ -84,7 +89,6 @@ yarn install && yarn start
 - api 데이터 처리
 
 ## 추가할 기능
-- drag & drop
 - modal 화면 클릭 닫기
 
 ## 리팩토링

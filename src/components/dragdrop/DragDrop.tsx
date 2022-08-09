@@ -1,37 +1,36 @@
+import { CheckIcon } from 'assets/svgs'
 import MovieItem from 'components/item/Item'
 import React, { useState } from 'react'
 import { DragDropContext, Draggable, Droppable, DropResult } from 'react-beautiful-dnd'
 import store from 'store'
 import { IFav } from 'types/movie'
+import styles from './DragDrop.module.scss'
 
 const getItemStyle = (isDragging: boolean, draggableStyle: any) => ({
-  padding: '0 0 0 20px',
   margin: `0px 0px 15px 0px`,
-  background: isDragging ? '#4a2975' : 'gray',
-  color: isDragging ? 'white' : 'black',
   ...draggableStyle,
 })
 
 const DragDrop = () => {
-  const [todo, setTodo] = useState(store.get('fav'))
+  const [item, setItem] = useState(store.get('fav'))
 
   const onDragEnd = (result: DropResult) => {
     const { source, destination } = result
     if (!destination) return
 
-    const items = Array.from(todo)
+    const items = Array.from(item)
     const [newOrder] = items.splice(source.index, 1)
     items.splice(destination.index, 0, newOrder)
-    setTodo(items)
-    store.set('fav', todo)
+    setItem(items)
+    store.set('fav', items)
   }
   return (
-    <div className='App'>
+    <div className={styles.DragDrop}>
       <DragDropContext onDragEnd={onDragEnd}>
-        <Droppable droppableId='todo'>
+        <Droppable droppableId='item'>
           {(provided) => (
-            <ul className='todo' {...provided.droppableProps} ref={provided.innerRef}>
-              {todo.map((movie: IFav, index: number) => {
+            <div className={styles.favoriteMovie} {...provided.droppableProps} ref={provided.innerRef}>
+              {item.map((movie: IFav, index: number) => {
                 return (
                   <Draggable key={movie.Id} draggableId={movie.Id} index={index}>
                     {(provide, snapshot) => (
@@ -41,6 +40,7 @@ const DragDrop = () => {
                         {...provide.dragHandleProps}
                         style={getItemStyle(snapshot.isDragging, provide.draggableProps.style)}
                       >
+                        <CheckIcon className={styles.icon} />
                         <MovieItem key={`movie-${movie.Title}-${movie.imdbID}`} item={movie} />
                         {provided.placeholder}
                       </div>
@@ -48,7 +48,7 @@ const DragDrop = () => {
                   </Draggable>
                 )
               })}
-            </ul>
+            </div>
           )}
         </Droppable>
       </DragDropContext>

@@ -19,7 +19,7 @@ const MovieItem = ({ item }: Props) => {
   }
 
   return (
-    <li className={styles.movieList}>
+    <div className={styles.movieList}>
       <button className={styles.movieBtn} type='button' onClick={openReq}>
         <img src={item.Poster} alt={item.Title} />
         <span className={styles.movieInfo}>
@@ -28,9 +28,9 @@ const MovieItem = ({ item }: Props) => {
           <div className={styles.info}>Type:{item.Type}</div>
         </span>
         {item.Fav ? <StarIcon /> : null}
-      </button>{' '}
+      </button>
       {isOpen ? <Modal item={item} open={isOpen} close={closeReq} /> : null}
-    </li>
+    </div>
   )
 }
 

@@ -60,12 +60,16 @@ const Movie = () => {
             movies.map((movie, index) => {
               if (movies.length === index + 1) {
                 return (
-                  <div key={`movie-${movie.Title}-${movie.imdbID}`} ref={lastBookElementRef}>
+                  <li key={`movie-${movie.Title}-${movie.imdbID}`} ref={lastBookElementRef}>
                     <MovieItem item={movie} />
-                  </div>
+                  </li>
                 )
               }
-              return <MovieItem key={`movie-${movie.Title}-${movie.imdbID}`} item={movie} />
+              return (
+                <li key={`movie-${movie.Title}-${movie.imdbID}`}>
+                  <MovieItem item={movie} />
+                </li>
+              )
             })
           ) : (
             <div className={styles.noResult}>검색결과가 없습니다.</div>

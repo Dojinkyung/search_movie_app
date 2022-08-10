@@ -73,23 +73,22 @@ yarn install && yarn start
 영화를 검색하고 즐겨찾기로 등록할 수 있는 react 앱을 구현했습니다.
 
 ## 1. 데이터 활용
-영화 API:www.omdbapi.com
+- 영화 API:www.omdbapi.com
 
 ## 2. 즐겨찾기
+- localstorage 저장: store.js 사용
 
 ## 3. 무한 스크롤
+- Intersection Observer API 사용
 
 ## 4. drag & drop
 - 즐겨찾기에서 체크표시를 drag하여 사용
 
-# ✏️ 어려웠던 점 + 추가할 기능 + 리팩토링
+# ✏️ 어려웠던 점
 
 ## 어려웠던 점
 - 무한 스크롤을 받아오는 부분
 - api 데이터 처리
-
-## 추가할 기능
-- modal 화면 클릭 닫기
 
 ## 리팩토링
 - 기존 axios 에서 react Query를 이용하여 api를 받아왔습니다.

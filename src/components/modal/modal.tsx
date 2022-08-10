@@ -15,10 +15,17 @@ const Modal = (props: props) => {
   const { open, close, item } = props
   const [, setFavSelect] = useRecoilState(FavMovie)
 
+  const handleClickOutside = () => {
+    close()
+  }
+  const uniqueId = () => Math.round(Date.now() * Math.random()).toString()
+  const handleModalContent = (event: { stopPropagation: () => void }) => {
+    event.stopPropagation()
+  }
   const handleEventBtn = () => {
     if (item.Fav === false) {
       item.Fav = true
-      item.Id = store.get('fav').length.toString()
+      item.Id = uniqueId()
 
       store.set('fav', [...store.get('fav'), item])
       setFavSelect(store.get('fav'))
@@ -34,9 +41,9 @@ const Modal = (props: props) => {
   }
 
   return (
-    <div className={cx({ [styles.bg]: open })}>
+    <div className={cx({ [styles.bg]: open })} onClick={handleClickOutside} aria-hidden>
       <div className={cx({ [styles.modalActive]: open })}>
-        <div className={styles.area}>
+        <div className={styles.area} onClick={handleModalContent} aria-hidden>
           <p className={styles.info}>
             {item.Title}(을)를 {item.Fav ? '삭제' : '추가'}하시겠습니까?
           </p>
